@@ -23,7 +23,7 @@ public class UserService {
 	private User find(Long id) {
 		  Optional<User> obj = repo.findById(id);
 			return obj.orElseThrow(() -> new ObjectNotFoundException(
-					"Tema não encontrado com esse id: " + id));
+					"User não encontrado com esse id: " + id));
 	}
 
 	

@@ -3,6 +3,7 @@ package com.auth.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -26,5 +27,12 @@ public class MessageController {
 		
 	}
 	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteMessage(@RequestHeader("Authorization") String token, @PathVariable Long id){
+		
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+		
+	}
 
 }

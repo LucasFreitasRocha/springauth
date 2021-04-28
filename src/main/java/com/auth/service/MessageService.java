@@ -1,9 +1,12 @@
 package com.auth.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.auth.dto.in.MessageDto;
+import com.auth.exception.ObjectNotFoundException;
 import com.auth.model.Message;
 import com.auth.model.User;
 import com.auth.repository.MessageRepository;
@@ -19,6 +22,19 @@ public class MessageService {
 		Message message = new Message(messageDto.getContent(), user);
 		return repo.save(message);
 		
+	}
+
+	
+	public void delete(Long id) {
+		Message message = find(id);
+		repo.delete(message);
+	}
+
+
+	private Message find(Long id) {
+		 Optional<Message> obj = repo.findById(id);
+			return obj.orElseThrow(() -> new ObjectNotFoundException(
+					"Messagem não encontrada com esse id: " + id));
 	}
 
 }
