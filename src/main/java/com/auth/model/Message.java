@@ -17,6 +17,7 @@ public class Message {
 	
 	private String content;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private Usuario user;

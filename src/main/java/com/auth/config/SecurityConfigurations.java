@@ -51,6 +51,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.GET, "/").permitAll()
 		.antMatchers(HttpMethod.POST, "/auth").permitAll()
+		.antMatchers(HttpMethod.GET, "/message").permitAll()
 		.antMatchers(HttpMethod.DELETE, "/message/*").hasRole("MODERADOR")
 		.anyRequest().authenticated()
 		.and().csrf().disable()
