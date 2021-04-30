@@ -11,7 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.auth.model.User;
+import com.auth.model.Usuario;
 import com.auth.repository.UserRepository;
 import com.auth.service.TokenService;
 
@@ -40,7 +40,7 @@ public class AuthMiddleware extends OncePerRequestFilter {
 
 	private void autenticarCliente(String token) {
 		Long idUser = tokenService.getIdUser(token);
-		User user = userRepository.findById(idUser).get();
+		Usuario user = userRepository.findById(idUser).get();
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}

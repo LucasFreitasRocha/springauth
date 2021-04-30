@@ -15,7 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class User implements UserDetails{
+public class Usuario implements UserDetails{
 private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(generator = "increment")
@@ -29,7 +29,7 @@ private static final long serialVersionUID = 1L;
 	private List<Role> roles = new ArrayList<>();
 	
 	
-	public User() {
+	public Usuario() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -119,7 +119,7 @@ private static final long serialVersionUID = 1L;
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Usuario other = (Usuario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

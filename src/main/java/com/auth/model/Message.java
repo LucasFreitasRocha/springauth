@@ -19,14 +19,14 @@ public class Message {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
+	private Usuario user;
 
 	public Message() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Message(String content, User user) {
+	public Message(String content, Usuario user) {
 		this.content = content;
 		this.user = user;
 	}
@@ -47,11 +47,11 @@ public class Message {
 		this.content = content;
 	}
 
-	public User getUser() {
+	public Usuario getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Usuario user) {
 		this.user = user;
 	}
 	

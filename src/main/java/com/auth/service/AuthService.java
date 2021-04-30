@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.auth.dto.in.LoginDto;
 import com.auth.dto.out.TokenDto;
-import com.auth.model.User;
+import com.auth.model.Usuario;
 import com.auth.repository.UserRepository;
 
 @Service
@@ -30,7 +30,7 @@ public class AuthService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<User> usuario = userRepository.findByEmail(username);
+		Optional<Usuario> usuario = userRepository.findByEmail(username);
 		if (usuario.isPresent()) {
 			return usuario.get();
 		}
