@@ -1,0 +1,35 @@
+version: '3'
+services:
+  app:
+    build:
+      dockerfile: ./spring.dockerfile
+      context: .
+    container_name: app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "db"
+    networks:
+      - projeto-network
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/login
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    restart: unless-stopped
+  db:
+    container_name: db
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: login
+      PGDATA: /data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - projeto-network
+    restart: unless-stopped  
+networks:
+  projeto-network:
+    driver: bridge

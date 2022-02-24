@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.auth.dto.in.RegisterDto;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,6 +37,12 @@ private static final long serialVersionUID = 1L;
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public Usuario(RegisterDto registerDto){
+		this.email = registerDto.getEmail();
+		this.name = registerDto.getName();
+
+	}
 	
 	
 	public Long getId() {
@@ -57,9 +64,9 @@ private static final long serialVersionUID = 1L;
 		this.name = name;
 	}
 
-
-
-
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 
 	public void setEmail(String email) {
 		this.email = email;

@@ -17,6 +17,7 @@ public class Role implements GrantedAuthority {
 	private Long id;
 	
 	private String name;
+
 	
 	
 
@@ -39,7 +40,7 @@ public class Role implements GrantedAuthority {
 
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = "ROLE_"+ name.toUpperCase();
 	}
 
 

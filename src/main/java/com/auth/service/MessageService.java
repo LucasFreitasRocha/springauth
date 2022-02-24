@@ -51,15 +51,19 @@ public class MessageService {
 			
 			
 		}else {
-			user.getAuthorities().forEach(a -> {
-				  System.out.println("roles" + a.getAuthority());
-				  if(a.getAuthority().equals("ROLE_MODERADOR")) {
-					  message.setContent(messageDto.getContent());
+			if(user.getAuthorities().isEmpty()){
+				throw new BadRequestException("Você não pode atualizar essa mensagem");
+			}else {
+				user.getAuthorities().forEach(a -> {
+					System.out.println("roles" + a.getAuthority());
+					if (a.getAuthority().equals("ROLE_MODERADOR")) {
+						message.setContent(messageDto.getContent());
 						repo.save(message);
-				  }else {
-					  throw new BadRequestException("Você não pode atualizar essa mensagem");
-				  }
+					} else {
+						throw new BadRequestException("Você não pode atualizar essa mensagem");
+					}
 				});
+			}
 			
 		}
 		

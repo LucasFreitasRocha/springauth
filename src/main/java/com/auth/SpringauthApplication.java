@@ -10,7 +10,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SpringauthApplication {
 
 	public static void main(String[] args) {
+
+
 		SpringApplication.run(SpringauthApplication.class, args);
+
+
+
 	}
 
 }
