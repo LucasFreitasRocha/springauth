@@ -2,6 +2,7 @@
   Esse repositorio é  uma api com um  estudo sobre auntenticação do spring com Bearer token jwt.  
  #### disponivel em [heroku](https://spring-auth-devrocha.herokuapp.com/swagger-ui.html)
 
+## Docker - branch [aqui](https://github.com/LucasFreitasRocha/springauth/tree/docker)
 ## Swagger
 
 
