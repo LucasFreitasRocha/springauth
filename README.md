@@ -6,6 +6,8 @@
 
 Para subir aplicação java no docker é necessário copiar o jar (no meu casso, poderia ter feito a build em war)  para o imagem e depois subir o container: para isso eu criei um script(subir.sh) para fazer essas duas etapas, para futuro vou trocar este script  pelo jenkins para cuidar dessa parte.
 
+![subir.sh](https://github.com/LucasFreitasRocha/springauth/blob/docker/images/subirSh.png)
+
 ## Swagger
 
 
