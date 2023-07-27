@@ -121,7 +121,7 @@ utilize o comando ipconfig:
 ### ip no  linux
 utilize o comando ifconfig ou comando certo para sua distribuição linux:
 
-## Endpoints disponiveis somento na branch docker
+## Endpoints disponiveis somente na branch docker
  
  Na versão master que corresponde ao que está no heroku não está disponiveis esses endpoints para gerenciamento de recursos.
 ### Create user
