@@ -1,6 +1,6 @@
  # Spring Auth
   Esse repositorio é  uma api com um  estudo sobre auntenticação do spring com Bearer token jwt.  
- #### disponivel em [heroku](https://spring-auth-devrocha.herokuapp.com/swagger-ui.html)
+ #### disponivel em [railway](https://springauth-production.up.railway.app/swagger-ui.html)
  
  ## Branch docker 
  Explicação no final do readme ou [aqui](https://github.com/LucasFreitasRocha/springauth/tree/docker)
@@ -20,7 +20,7 @@ para facilitar a interação com a api foi incluido o swagger na aplicação. O 
  - email: user@email.com , senha: 123456
  - email: moderador@email.com, senha: 123456
  
- ## Se Autenticando no [heroku](https://spring-auth-devrocha.herokuapp.com/swagger-ui.html)
+ ## Se Autenticando no [railway](https://springauth-production.up.railway.app/swagger-ui.html)
  Acessando o link você irá entrar no swagger, basta clicar no auth-controller na rota post-auth e colocar as informações para se autenticar no body da requisição:
  
  
@@ -30,7 +30,7 @@ para facilitar a interação com a api foi incluido o swagger na aplicação. O 
  
  ![alt text](https://github.com/LucasFreitasRocha/springauth/blob/master/images/ResponseAuth.png)
 
-## Teste de Autorização no [heroku](https://spring-auth-devrocha.herokuapp.com/swagger-ui.html)
+## Teste de Autorização no [railway](https://springauth-production.up.railway.app/swagger-ui.html)
 
 
 Para fazer os testes de autenticação/autorização criei um crud simples com Entity Message que é composto do conteudo da mensagem e qual usuario criou.
