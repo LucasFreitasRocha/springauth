@@ -12,7 +12,7 @@ services:
     networks:
       - projeto-network
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/login
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5433/login
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
@@ -26,7 +26,8 @@ services:
       POSTGRES_DB: login
       PGDATA: /data/postgres
     ports:
-      - "5432:5432"
+      - "5433:5433"
+    command: -p 5433
     networks:
       - projeto-network
     restart: unless-stopped  
