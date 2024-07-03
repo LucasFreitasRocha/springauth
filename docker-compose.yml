@@ -12,10 +12,10 @@ services:
     networks:
       - projeto-network
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5433/login
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - DATABASE_URL=jdbc:postgresql://db:5433/login
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+      - DDL_AUTO=update
     restart: unless-stopped
   db:
     container_name: db
