@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
+import com.auth.dto.in.RegisterDto;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Usuario implements UserDetails{
 private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(generator = "increment")
+	@Id
+	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private Long id;
 	private String name;
@@ -35,6 +33,12 @@ private static final long serialVersionUID = 1L;
 	public Usuario() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Usuario(RegisterDto registerDto){
+		this.email = registerDto.getEmail();
+		this.name = registerDto.getName();
+
 	}
 	
 	
@@ -57,9 +61,9 @@ private static final long serialVersionUID = 1L;
 		this.name = name;
 	}
 
-
-
-
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 
 	public void setEmail(String email) {
 		this.email = email;

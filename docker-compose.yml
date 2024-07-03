@@ -1,0 +1,36 @@
+version: '3'
+services:
+  app:
+    build:
+      dockerfile: ./spring.dockerfile
+      context: .
+    container_name: app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "db"
+    networks:
+      - projeto-network
+    environment:
+      - DATABASE_URL=jdbc:postgresql://db:5433/login
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+      - DDL_AUTO=update
+    restart: unless-stopped
+  db:
+    container_name: db
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: login
+      PGDATA: /data/postgres
+    ports:
+      - "5433:5433"
+    command: -p 5433
+    networks:
+      - projeto-network
+    restart: unless-stopped  
+networks:
+  projeto-network:
+    driver: bridge
