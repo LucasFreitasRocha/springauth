@@ -42,8 +42,7 @@ public class AuthService implements UserDetailsService{
 	public TokenDto authenticate(LoginDto loginDto, AuthenticationManager authManager) {
 		UsernamePasswordAuthenticationToken dadosLogin = loginDto.converter();
 		Authentication authentication = authManager.authenticate(dadosLogin);
-		String token = tokenService.gerarToken(authentication);
-		return new TokenDto(token, "Bearer");
+		return new TokenDto(tokenService.gerarToken(authentication), "Bearer");
 		
 		
 	}

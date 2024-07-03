@@ -36,6 +36,6 @@ public class CustomAuthenticationManager implements AuthenticationManager {
             throw new BadCredentialsException("Bad credentials");
         }
 
-        return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());
     }
 }

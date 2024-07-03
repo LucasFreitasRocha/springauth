@@ -27,7 +27,7 @@ public class TokenService {
 		Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
 		
 		return Jwts.builder()
-				.setIssuer("API do Fórum da Alura")
+				.setIssuer("API SpringAuth")
 				.setSubject(logado.getId().toString())
 				.setIssuedAt(hoje)
 				.setExpiration(dataExpiracao)
@@ -37,7 +37,7 @@ public class TokenService {
 
 	public boolean isTokenValid(String token) {
 		try {
-			Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+			Jwts.parser().setSigningKey(this.secret).build().parseSignedClaims(token);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -45,7 +45,7 @@ public class TokenService {
 	}
 
 	public Long getIdUser(String token) {
-		Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+		Claims claims = Jwts.parser().setSigningKey(this.secret).build().parseSignedClaims(token).getBody();
 		return Long.parseLong(claims.getSubject());
 	}
 
