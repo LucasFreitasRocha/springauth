@@ -29,7 +29,6 @@ public class SecurityConfigurations {
     private final UserRepository userRepository;
 
 
-    //Authentication settings
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -37,6 +36,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                         authorizationManagerRequestMatcherRegistry
                                 .requestMatchers(HttpMethod.GET, "/").permitAll()
+                                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/auth").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/message").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/user").permitAll()
@@ -44,14 +44,11 @@ public class SecurityConfigurations {
                                 .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
-                        httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                        httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(new AuthMiddleware(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.debug(false).ignoring()
-                .requestMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");
-    }
+  
 
 }
