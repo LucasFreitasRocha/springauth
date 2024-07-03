@@ -27,7 +27,6 @@ public class SecurityConfigurations {
 
     private final TokenService tokenService;
     private final UserRepository userRepository;
-    private final AuthenticationProvider authenticationProvider;
 
 
     //Authentication settings
@@ -44,10 +43,8 @@ public class SecurityConfigurations {
                                 .requestMatchers(HttpMethod.DELETE, "/message/*").hasRole("MODERADOR")
                                 .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
-                .authenticationProvider(authenticationProvider)
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
-                        httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(new AuthMiddleware(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
+                        httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
     }
