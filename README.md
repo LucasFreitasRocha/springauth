@@ -1,6 +1,11 @@
  # Spring Auth
   Esse repositorio é  uma api com um  estudo sobre auntenticação do spring com Bearer token jwt.  
- #### disponivel em [heroku](https://spring-auth-devrocha.herokuapp.com/swagger-ui.html)
+ #### disponivel em [railway](https://springauth-production.up.railway.app/swagger-ui.html)
+ 
+ ## Branch docker 
+ Explicação no final do readme ou [aqui](https://github.com/LucasFreitasRocha/springauth/tree/docker)
+
+
 
 ## Docker 
 
@@ -75,7 +80,7 @@ para facilitar a interação com a api foi incluido o swagger na aplicação. O 
  - email: user@email.com , senha: 123456
  - email: moderador@email.com, senha: 123456
  
- ## Se Autenticando no [heroku](https://spring-auth-devrocha.herokuapp.com/swagger-ui.html)
+ ## Se Autenticando no [railway](https://springauth-production.up.railway.app/swagger-ui.html)
  Acessando o link você irá entrar no swagger, basta clicar no auth-controller na rota post-auth e colocar as informações para se autenticar no body da requisição:
  
  
@@ -85,7 +90,7 @@ para facilitar a interação com a api foi incluido o swagger na aplicação. O 
  
  ![alt text](https://github.com/LucasFreitasRocha/springauth/blob/master/images/ResponseAuth.png)
 
-## Teste de Autorização no [heroku](https://spring-auth-devrocha.herokuapp.com/swagger-ui.html)
+## Teste de Autorização no [railway](https://springauth-production.up.railway.app/swagger-ui.html)
 
 
 Para fazer os testes de autenticação/autorização criei um crud simples com Entity Message que é composto do conteudo da mensagem e qual usuario criou.
@@ -126,3 +131,63 @@ Para fazer os testes de autenticação/autorização criei um crud simples com E
  #### Exemplo de Response de delete com usuario Moderador:
  
  ![alt text](https://github.com/LucasFreitasRocha/springauth/blob/master/images/DeleteMessageResponseOk.png)
+
+
+## Docker - branch [aqui](https://github.com/LucasFreitasRocha/springauth/tree/docker)
+
+para utilizar o projeto com o docker é só baixar a branch e ter docker-compose instalado e rodar o  subir.sh ou utilizar os comandos que estão dentro do arquivo:
+ 
+    1- mvn clean package 
+    2- docker compose up --build
+
+Para subir aplicação java no docker é necessário copiar o jar (no meu casso, poderia ter feito a build em war)  para o imagem e depois subir o container: para isso eu criei um script(subir.sh) para fazer essas duas etapas, para futuro vou trocar este script  pelo jenkins para cuidar dessa parte.
+
+![subir.sh](https://github.com/LucasFreitasRocha/springauth/blob/docker/images/subirSh2.png)
+
+Para subir o container utilizei docker-compose... e um dockerfile para montar a imagem do spring-java.
+
+
+### docker-compose - container spring-app
+*  linha 5 tem o atributo dockerfile que referencia o dockerfile do spring-java
+*  linha 15 tem a string de conexão com o banco de dados e está com o nome(dominio) do container do banco de dados e por conta disso
+*  linha 10 e 11 tem o depends_on e o nome do container e por conta disso no fluxo o container do db sobe primeiro
+*  linha 19 coloquei restart: unless-stopped por que o container do db pode subir mas não está pronto para conexão ainda e por conta disso quebrar a subida do container do java
+![docker-compose](https://github.com/LucasFreitasRocha/springauth/blob/docker/images/dockerCompose.png)
+
+### dockerfile - imagem java
+![dockerfile](https://github.com/LucasFreitasRocha/springauth/blob/docker/images/dockerfile.png)
+
+A imagem é feita com alpine e jdk 8, nessa imagem eu crio um grupo e um usaurio chamado spring, copio o jar construido na etapa 1 do subir.sh e utilizo o comando 
+
+    java -jar app.jar 
+
+para começar o spring.
+
+### docker-compose - postgres/network
+
+A parte do container do banco de dados é bem simples... Uso a imagem oficial do postgres
+![dockerCompose-postgres](https://github.com/LucasFreitasRocha/springauth/blob/docker/images/dockerCompose2.png)
+
+network é feito para estabelecer a conexão entre os 2 containers
+
+### docker - url de conexão
+para url de conexão no container do spring java , além do usar o nome do container do banco de dados pode ser usado o ip da sua maquina. É possivel usar o ip da maquina pois eu externalizo a porta do container postgres
+![urlConexao](https://github.com/LucasFreitasRocha/springauth/blob/docker/images/urlConexaoBdIp.png)
+
+### ip no windwos
+utilize o comando ipconfig:
+
+![ipconfig](https://github.com/LucasFreitasRocha/springauth/blob/docker/images/ipconfig.png)
+### ip no  linux
+utilize o comando ifconfig ou comando certo para sua distribuição linux:
+
+## Endpoints disponiveis somente na branch docker
+ 
+ Na versão master que corresponde ao que está no heroku não está disponiveis esses endpoints para gerenciamento de recursos.
+### Create user
+ ![createUser](https://github.com/LucasFreitasRocha/springauth/blob/docker/images/createUser.png)
+ No create user tem o atributo moderador que é um boolean para criar um usuario com o cargo moderador para fazer os testes no endpoint de mensagens
+ 
+ ### All user 
+ apenas para mostrar todos os usuarios só é necessario estár autenticado
+ ![Allusers](https://github.com/LucasFreitasRocha/springauth/blob/docker/images/allUsers.png)
