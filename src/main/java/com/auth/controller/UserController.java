@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> allUsers(){
+    public ResponseEntity<List<Usuario>> allUsers(@RequestHeader("Authorization") String token){
         return ResponseEntity.ok(service.findAll());
     }
 
