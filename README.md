@@ -19,7 +19,7 @@ para facilitar a interação com a api foi incluido o swagger na aplicação. O 
  - email: user@email.com , senha: 123456
  - email: moderador@email.com, senha: 123456
  
- ## Se Autenticando no [railway](https://springauth-production.up.railway.app/swagger-ui.html)
+ ## Se Autenticando no [render](https://springauth.onrender.com/swagger-ui/index.html)
  Acessando o link você irá entrar no swagger, basta clicar no auth-controller na rota post-auth e colocar as informações para se autenticar no body da requisição:
  
  
@@ -29,7 +29,7 @@ para facilitar a interação com a api foi incluido o swagger na aplicação. O 
  
  ![alt text](https://github.com/LucasFreitasRocha/springauth/blob/master/images/ResponseAuth.png)
 
-## Teste de Autorização no [railway](https://springauth-production.up.railway.app/swagger-ui.html)
+## Teste de Autorização no [render](https://springauth.onrender.com/swagger-ui/index.html)
 
 
 Para fazer os testes de autenticação/autorização criei um crud simples com Entity Message que é composto do conteudo da mensagem e qual usuario criou.
@@ -74,14 +74,9 @@ Para fazer os testes de autenticação/autorização criei um crud simples com E
 
 ## Docker - branch [aqui](https://github.com/LucasFreitasRocha/springauth/tree/docker)
 
-para utilizar o projeto com o docker é só baixar a branch e ter docker-compose instalado e rodar o  subir.sh ou utilizar os comandos que estão dentro do arquivo:
- 
-    1- mvn clean package 
-    2- docker compose up --build
+para utilizar o projeto local com o docker é só baixar a branch e ter docker-compose instalado e rodar o  comando:
 
-Para subir aplicação java no docker é necessário copiar o jar (no meu casso, poderia ter feito a build em war)  para o imagem e depois subir o container: para isso eu criei um script(subir.sh) para fazer essas duas etapas, para futuro vou trocar este script  pelo jenkins para cuidar dessa parte.
-
-![subir.sh](https://github.com/LucasFreitasRocha/springauth/blob/docker/images/subirSh2.png)
+    1- docker compose up --build
 
 Para subir o container utilizei docker-compose... e um dockerfile para montar a imagem do spring-java.
 
