@@ -1,15 +1,14 @@
 package com.auth.dto.in;
 
+import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+@NoArgsConstructor
 public class LoginDto {
 	
 	private String email;
 	private String password;
-	public LoginDto() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+
 	
 	public String getEmail() {
 		return email;

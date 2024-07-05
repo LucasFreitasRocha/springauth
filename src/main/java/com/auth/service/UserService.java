@@ -7,6 +7,9 @@ import java.util.Optional;
 import com.auth.dto.in.RegisterDto;
 import com.auth.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +18,7 @@ import com.auth.model.Usuario;
 import com.auth.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 	
 	@Autowired private TokenService tokenService;
 	@Autowired private UserRepository repo;
@@ -46,7 +49,15 @@ public class UserService {
 		return repo.save(u);
 	}
 
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Optional<Usuario> usuario = repo.findByEmail(username);
+		if (usuario.isPresent()) {
+			return usuario.get();
+		}
 
+		throw new UsernameNotFoundException("bad credentials!");
+	}
 	public List<Usuario> findAll() {
 		return repo.findAll();
 	}
