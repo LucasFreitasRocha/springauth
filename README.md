@@ -1,9 +1,7 @@
  # Spring Auth
   Esse repositorio é  uma api com um  estudo sobre auntenticação do spring com Bearer token jwt.  
- #### disponivel em [railway](https://springauth-production.up.railway.app/swagger-ui.html)
- 
- ## Branch docker 
- Explicação no final do readme ou [aqui](https://github.com/LucasFreitasRocha/springauth/tree/docker)
+ #### disponivel em [render](https://springauth.onrender.com/swagger-ui/index.html)
+
 
 
 ## Swagger
@@ -72,7 +70,7 @@ Para fazer os testes de autenticação/autorização criei um crud simples com E
  ![alt text](https://github.com/LucasFreitasRocha/springauth/blob/master/images/DeleteMessageResponseOk.png)
 
 
-## Docker - branch [aqui](https://github.com/LucasFreitasRocha/springauth/tree/docker)
+## Docker 
 
 para utilizar o projeto local com o docker é só baixar a branch e ter docker-compose instalado e rodar o  comando:
 
@@ -91,7 +89,7 @@ Para subir o container utilizei docker-compose... e um dockerfile para montar a 
 ### dockerfile - imagem java
 ![dockerfile](https://github.com/LucasFreitasRocha/springauth/blob/master/images/dockerfile.png)
 
-A imagem é feita com alpine e jdk 8, nessa imagem eu crio um grupo e um usaurio chamado spring, copio o jar construido na etapa 1 do subir.sh e utilizo o comando 
+A imagem é feita com alpine e jdk 17, nessa imagem eu crio um grupo e um usaurio chamado spring, copio o jar construido na etapa 1 do subir.sh e utilizo o comando 
 
     java -jar app.jar 
 
