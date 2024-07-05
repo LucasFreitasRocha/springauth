@@ -1,7 +1,9 @@
 package com.auth.dto.in;
 
+import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+@NoArgsConstructor
 public class RegisterDto {
 
     private String name;
@@ -9,8 +11,6 @@ public class RegisterDto {
     private String password;
     private Boolean moderador;
 
-    public RegisterDto() {
-    }
 
     public String getName() {
         return name;
@@ -45,7 +45,6 @@ public class RegisterDto {
     }
 
     public UsernamePasswordAuthenticationToken converter() {
-        System.out.println("email: " + email + " senha: " + password);
         return new UsernamePasswordAuthenticationToken(email, password);
     }
 }

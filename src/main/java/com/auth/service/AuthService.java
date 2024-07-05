@@ -2,6 +2,7 @@ package com.auth.service;
 
 import java.util.Optional;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,29 +18,12 @@ import com.auth.model.Usuario;
 import com.auth.repository.UserRepository;
 
 @Service
-public class AuthService implements UserDetailsService{
+@AllArgsConstructor
+public class AuthService {
+	private final TokenService tokenService;
+	private final  AuthenticationManager authManager;
 
-	@Autowired
-	private UserRepository userRepository;
-	
-
-	
-	@Autowired
-	private TokenService tokenService;
-	
-	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<Usuario> usuario = userRepository.findByEmail(username);
-		if (usuario.isPresent()) {
-			return usuario.get();
-		}
-		
-		throw new UsernameNotFoundException("bad credentials!");
-	}
-
-
-	public TokenDto authenticate(LoginDto loginDto, AuthenticationManager authManager) {
+	public TokenDto authenticate(LoginDto loginDto) {
 		UsernamePasswordAuthenticationToken dadosLogin = loginDto.converter();
 		Authentication authentication = authManager.authenticate(dadosLogin);
 		return new TokenDto(tokenService.gerarToken(authentication), "Bearer");

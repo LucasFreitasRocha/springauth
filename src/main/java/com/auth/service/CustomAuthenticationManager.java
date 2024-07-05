@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomAuthenticationManager implements AuthenticationManager {
-    private final AuthService userDetailsService;
+    private final UserService userDetailsService;
 
-    public CustomAuthenticationManager(AuthService userDetailsService) {
+    public CustomAuthenticationManager(UserService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

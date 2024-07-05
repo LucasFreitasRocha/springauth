@@ -2,18 +2,14 @@ package com.auth.controller;
 
 import com.auth.dto.in.RegisterDto;
 import com.auth.dto.out.TokenDto;
-import com.auth.dto.out.UserDto;
 import com.auth.model.Usuario;
 import com.auth.service.TokenService;
 import com.auth.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,14 +22,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@AllArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService service;
-    @Autowired
-    private TokenService tokenService;
-    @Autowired
-    private AuthenticationManager authManager;
+
+    private final UserService service;
+
+    private final TokenService tokenService;
+
+    private final  AuthenticationManager authManager;
 
     @PostMapping
     public ResponseEntity<TokenDto> register(@RequestBody RegisterDto registerDto){
@@ -51,7 +48,8 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> allUsers(@RequestHeader("Authorization") String token){
+    @Operation(summary = "show all users",security = { @SecurityRequirement(name = "bearer-key") })
+    public ResponseEntity<List<Usuario>> allUsers(@Parameter(hidden = true) @RequestHeader("Authorization") String token){
         return ResponseEntity.ok(service.findAll());
     }
 
